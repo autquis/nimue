@@ -1,5 +1,11 @@
+use nimue::hash::sponge::DuplexSponge;
+
 poseidon_sponge!(254, PoseidonPermx5_254_3, x5_254_3);
 poseidon_sponge!(254, PoseidonPermx5_254_5, x5_254_5);
+
+pub type Poseidonx5_254_3 = DuplexSponge<PoseidonPermx5_254_3>;
+pub type Poseidonx5_254_5 = DuplexSponge<PoseidonPermx5_254_5>;
+
 mod x5_254_3 {
     use ark_ff::MontFp;
     pub type Field = ark_bn254::Fr;

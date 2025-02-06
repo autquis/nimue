@@ -3,7 +3,7 @@
 /// over the scalar field of BLS12-381.
 use ark_ec::{CurveGroup, PrimeGroup};
 use ark_ff::PrimeField;
-use ark_std::UniformRand;
+use ark_ff::UniformRand;
 use nimue::plugins::ark::*;
 
 /// Extend the IO pattern with the Schnorr protocol.
@@ -55,9 +55,9 @@ fn prove<G, H, U>(
 ) -> ProofResult<&[u8]>
 where
     U: Unit,
+    G: CurveGroup,
     G::BaseField: PrimeField,
     H: DuplexHash<U>,
-    G: CurveGroup,
     Merlin<H, U>: GroupWriter<G> + FieldWriter<G::BaseField> + ByteChallenges,
 {
     // `Merlin` types implement a cryptographically-secure random number generator that is tied to the protocol transcript
@@ -128,13 +128,13 @@ fn main() {
 
     // Set the hash function (commented out other valid choices):
     // type H = nimue::hash::Keccak;
-    type H = nimue::hash::legacy::DigestBridge<blake2::Blake2s256>;
+    // type H = nimue::hash::legacy::DigestBridge<blake2::Blake2s256>;
     // type H = nimue::hash::legacy::DigestBridge<sha2::Sha256>;
-    // type H = nimue_poseidon::PoseidonHash;
+    type H = nimue_poseidon::bls12_381::Poseidonx5_255_5;
 
     // Unit type where the hash function works over.
-    type U = u8;
-    // type U = ark_bls12_381::Fq;
+    // type U = u8;
+    type U = ark_bls12_381::Fq;
 
     // Set up the IO for the protocol transcript with domain separator "nimue::examples::schnorr"
     let io = IOPattern::<H, U>::new("nimue::examples::schnorr");
@@ -151,7 +151,7 @@ fn main() {
     let proof = prove(&mut merlin, P, x).expect("Invalid proof");
 
     // Print out the hex-encoded schnorr proof.
-    println!("Here's a Schnorr signature:\n{}", hex::encode(proof));
+    // println!("Here's a Schnorr signature:\n{}", hex::encode(proof));
 
     // Verify the proof: create the verifier transcript, add the statement to it, and invoke the verifier.
     let mut arthur = Arthur::<H, U>::new(&io, &proof);

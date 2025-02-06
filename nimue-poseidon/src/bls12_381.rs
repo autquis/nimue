@@ -8,7 +8,7 @@ pub type Poseidonx5_255_5 = DuplexSponge<PoseidonPermx5_255_5>;
 
 mod x5_255_3 {
     use ark_ff::MontFp;
-    pub type Field = ark_bls12_381::Fr;
+    pub type Field = ark_bls12_381::Fq;
     pub const ALPHA: u64 = 5;
     pub const R_F: usize = 8;
     pub const R_P: usize = 57;
@@ -364,7 +364,7 @@ mod x5_255_3 {
 
 mod x5_255_5 {
     use ark_ff::MontFp;
-    pub type Field = ark_bls12_381::Fr;
+    pub type Field = ark_bls12_381::Fq;
     pub const ALPHA: u64 = 5;
     pub const R_F: usize = 8;
     pub const R_P: usize = 60;

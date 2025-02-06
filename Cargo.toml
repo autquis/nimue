@@ -11,11 +11,12 @@ members = [
 
 # Un-comment below for latest arkworks libraries.
 # [patch.crates-io]
-# ark-std = { git = "https://github.com/arkworks-rs/utils" }
+# ark-std = { git = "https://github.com/arkworks-rs/std" }
 # ark-ec = { git = "https://github.com/arkworks-rs/algebra" }
 # ark-ff = { git = "https://github.com/arkworks-rs/algebra" }
 # ark-serialize = { git = "https://github.com/arkworks-rs/algebra" }
 # ark-bls12-381 = { git = "https://github.com/arkworks-rs/algebra" }
+# ark-bn254 = { git = "https://github.com/arkworks-rs/algebra" }
 # ark-curve25519 = { git = "https://github.com/arkworks-rs/algebra" }
 # ark-pallas = { git = "https://github.com/arkworks-rs/algebra" }
 # ark-vesta = { git = "https://github.com/arkworks-rs/algebra" }
